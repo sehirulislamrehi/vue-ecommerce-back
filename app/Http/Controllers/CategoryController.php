@@ -97,9 +97,15 @@ class CategoryController extends Controller
 
     public function do_delete($id){
         $category = Category::find($id);
+
         if( File::exists('images/category/'. $category->image) ){
             File::delete('images/category/'. $category->image);
         }
+
+        foreach( $category->product as $product ){
+            $product->delete();
+        }
+        
         if( $category->delete() ){
             return response()->json(['delete'=> $category], 200);
         }

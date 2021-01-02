@@ -4,7 +4,7 @@
 <head>
      @yield('meta')
 
-     <title>Bracket Plus Responsive Bootstrap 4 Admin Template</title>
+     <title>Dashboard</title>
 
      @include('includes.css')
 </head>

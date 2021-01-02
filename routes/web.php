@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,6 +91,18 @@ Route::group(['prefix' => 'dashboard','middleware' => 'protect'], function(){
         Route::post('/do/delete/{id}',[CategoryController::class,'do_delete'])->name('category.do.delete');
     });
     //category route end
+
+    //product route start
+    Route::group(['prefix' => 'product'], function(){
+        Route::get('/',[ProductController::class,'index'])->name('product.show');
+        Route::get('/data',[ProductController::class,'data'])->name('product.data');
+        Route::post('/create',[ProductController::class,'create'])->name('product.create');
+        Route::get('/edit/{id}',[ProductController::class,'edit'])->name('product.edit');
+        Route::post('/update/{id}',[ProductController::class,'update'])->name('product.update');
+        Route::get('/delete/{id}',[ProductController::class,'delete'])->name('product.delete');
+        Route::post('/do/delete/{id}',[ProductController::class,'do_delete'])->name('product.do.delete');
+    });
+    //product route end
 
 });
 /*

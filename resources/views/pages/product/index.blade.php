@@ -35,14 +35,14 @@
      <div class="br-pagetitle">
           <i class="icon ion-ios-home-outline"></i>
           <div>
-               <h4>All Category</h4>
+               <h4>All Product</h4>
           </div>
      </div><!-- d-flex -->
 
      <div class="br-pagebody">
           <div class="br-section-wrapper">
 
-               <!-- add category row start -->
+               <!-- add row start -->
                <div class="row" style="margin-bottom: 30px;">
                     <div class="col-md-12">
                          <!-- Button trigger modal -->
@@ -55,20 +55,40 @@
                               <div class="modal-dialog" role="document">
                                    <div class="modal-content">
                                         <div class="modal-header">
-                                             <h5 class="modal-title" id="exampleModalLabel">Category</h5>
+                                             <h5 class="modal-title" id="exampleModalLabel">Product</h5>
                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <span aria-hidden="true">&times;</span>
                                              </button>
                                         </div>
                                         <div class="modal-body">
-                                             <form action="{{ route('category.create') }}" method="post" class="ajax-form" enctype="multipart/form-data">
+                                             <form action="{{ route('product.create') }}" method="post" class="ajax-form" enctype="multipart/form-data">
                                                   @csrf
                                                   <div class="form-group">
-                                                       <label>Category Name</label>
+                                                       <label>Name</label>
                                                        <input type="text" class="form-control" name="name">
                                                   </div>
                                                   <div class="form-group">
-                                                       <label>Category Image</label> <br>
+                                                       <label>Description</label>
+                                                       <textarea name="description" class="form-control" rows="3"></textarea>
+                                                  </div>
+                                                  <div class="form-group">
+                                                       <label>Regular Price</label>
+                                                       <input type="text" class="form-control" name="regular_price">
+                                                  </div>
+                                                  <div class="form-group">
+                                                       <label>Offer Price</label>
+                                                       <input type="text" class="form-control" name="offer_price">
+                                                  </div>
+                                                  <div class="form-group">
+                                                       <label>Product Category</label>
+                                                       <select name="category_id" class="form-control">
+                                                            @foreach( App\Models\Category::orderBy('id','desc')->get() as $category )
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                            @endforeach
+                                                       </select>
+                                                  </div>
+                                                  <div class="form-group">
+                                                       <label>Image</label> <br>
                                                        <img src="{{ asset('images/default.jpg') }}" id="image_preview_container" class="default-thhumbnail" width="100px" alt=""> <br> <br>
                                                        <input type="file" class="form-control-file" name="image" id="image">
                                                   </div>
@@ -86,16 +106,19 @@
                          <!-- Modal -->
                     </div>
                </div>
-               <!-- add category row end -->
+               <!-- add row end -->
 
-               <!-- category list table start -->
+               <!-- list table start -->
                <div class="row">
                     <div class="col-md-12 table-responsive">
-                         <table class="table table-bordered category-datatable" id="datatable">
+                         <table class="table table-bordered product-datatable" id="datatable">
                               <thead>
                                    <tr>
-                                        <th>Name</th>
                                         <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Regular Price</th>
+                                        <th>Offer Price</th>
+                                        <th>Category</th>
                                         <th>Action</th>
                                    </tr>
                               </thead>
@@ -122,17 +145,30 @@
 
      <script type="text/javascript">
           $(function() {
-               $('.category-datatable').DataTable({
+               $('.product-datatable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('category.data') }}",
-                    columns: [{
+                    ajax: "{{ route('product.data') }}",
+                    columns: [
+                         {
+                              data: 'image',
+                              name: 'image'
+                         },
+                         {
                               data: 'name',
                               name: 'name'
                          },
                          {
-                              data: 'image',
-                              name: 'image'
+                              data: 'regular_price',
+                              name: 'regular_price'
+                         },
+                         {
+                              data: 'offer_price',
+                              name: 'offer_price'
+                         },
+                         {
+                              data: 'category',
+                              name: 'category'
                          },
                          {
                               data: 'action',

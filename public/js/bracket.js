@@ -299,6 +299,7 @@ $(document).ready(function () {
 
 $(document).ready(function(){
     $(document).on('click','[data-toggle="modal"]', function(e){
+        $("#datatable").DataTable().ajax.reload();
         var target_modal_element = $(e.currentTarget).data('content');
         var target_modal = $(e.currentTarget).data('target');
 

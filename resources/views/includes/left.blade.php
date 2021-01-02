@@ -18,6 +18,15 @@
           </li><!-- br-menu-item -->
           <!-- single menu end -->
 
+          <!-- single menu start -->
+          <li class="br-menu-item">
+               <a href="{{ route('product.show') }}" class="br-menu-link">
+                    <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
+                    <span class="menu-item-label">Product</span>
+               </a><!-- br-menu-link -->
+          </li><!-- br-menu-item -->
+          <!-- single menu end -->
+
           <!-- dropdown menu start -->
           <li class="br-menu-item">
                <a href="#" class="br-menu-link with-sub">
