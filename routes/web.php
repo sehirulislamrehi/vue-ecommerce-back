@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,6 +78,15 @@ Route::post('/logout',[LoginController::class,'logout'])->name('do.logout');
 */
 Route::group(['prefix' => 'dashboard','middleware' => 'protect'], function(){
     Route::get('/',[DashboardController::class,'index'])->name('dashboard');
+
+    //category route start
+    Route::group(['prefix' => 'category'], function(){
+        Route::get('/',[CategoryController::class,'index'])->name('category.show');
+        Route::post('/create',[CategoryController::class,'create'])->name('category.create');
+        Route::get('/data',[CategoryController::class,'data'])->name('category.data');
+    });
+    //category route end
+
 });
 /*
 |--------------------------------------------------------------------------

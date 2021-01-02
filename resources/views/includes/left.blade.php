@@ -11,9 +11,9 @@
 
           <!-- single menu start -->
           <li class="br-menu-item">
-               <a href="mailbox.html" class="br-menu-link">
+               <a href="{{ route('category.show') }}" class="br-menu-link">
                     <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
-                    <span class="menu-item-label">Mailbox</span>
+                    <span class="menu-item-label">Category</span>
                </a><!-- br-menu-link -->
           </li><!-- br-menu-item -->
           <!-- single menu end -->
