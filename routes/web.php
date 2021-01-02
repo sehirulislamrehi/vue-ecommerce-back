@@ -82,8 +82,12 @@ Route::group(['prefix' => 'dashboard','middleware' => 'protect'], function(){
     //category route start
     Route::group(['prefix' => 'category'], function(){
         Route::get('/',[CategoryController::class,'index'])->name('category.show');
-        Route::post('/create',[CategoryController::class,'create'])->name('category.create');
         Route::get('/data',[CategoryController::class,'data'])->name('category.data');
+        Route::post('/create',[CategoryController::class,'create'])->name('category.create');
+        Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
+        Route::post('/update/{id}',[CategoryController::class,'update'])->name('category.update');
+        Route::get('/delete/{id}',[CategoryController::class,'delete'])->name('category.delete');
+        Route::post('/do/delete/{id}',[CategoryController::class,'do_delete'])->name('category.do.delete');
     });
     //category route end
 

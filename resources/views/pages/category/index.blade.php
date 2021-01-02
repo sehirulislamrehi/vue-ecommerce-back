@@ -137,7 +137,6 @@
                          {
                               data: 'action',
                               name: 'action',
-                              orderable: false,
                          },
                     ]
                });

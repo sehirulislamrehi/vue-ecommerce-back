@@ -40143,3 +40143,13 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 .color-red{
   color: red!important;
 }
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    border: 1px solid #1aaba2!important;
+    color: #000000;
+}
+table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting {
+  border: 1px solid #1aaba2!important;
+}
+table.dataTable.no-footer{
+  border: none!important;
+}

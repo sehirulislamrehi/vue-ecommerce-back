@@ -266,6 +266,7 @@ $(document).ready(function () {
             processData: false,
             success: function (response) {
                 $("#datatable").DataTable().ajax.reload();
+                $('[data-dismiss="modal"]').click();
 
                 if( response.create ){
                   swal("", "Item Added Successfully", "success");
@@ -293,3 +294,19 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
+$(document).ready(function(){
+    $(document).on('click','[data-toggle="modal"]', function(e){
+        var target_modal_element = $(e.currentTarget).data('content');
+        var target_modal = $(e.currentTarget).data('target');
+
+        var modal = $(target_modal);
+        var modalBody = $(target_modal + ' .modal-content');
+
+        modalBody.load(target_modal_element,function(){
+            modal.modal({show:true});
+        });
+    })
+})

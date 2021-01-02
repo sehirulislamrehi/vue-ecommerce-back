@@ -19,15 +19,16 @@ class CategoryController extends Controller
 
         return DataTables::of($category)
         ->rawColumns(['action','image'])
-        ->editColumn('image', function(){
-            
+        ->editColumn('image', function(Category $category){
+            $url = asset("images/category/".$category->image);
+            return "<img src='".$url."' width='50px' />" ;
         })
-        ->addColumn('action', function(){
+        ->addColumn('action', function(Category $category){
             return '
-            <button type="button"  data-target="#editModal" class="btn btn-primary" data-toggle="modal">
+            <button type="button" data-content="'.route('category.edit', $category->id).'" data-target="#myModal" class="btn btn-primary" data-toggle="modal">
                     Edit
             </button>
-            <button type="button" data-target="#editModal" class="btn btn-danger" data-toggle="modal">
+            <button type="button" data-content="'.route('category.delete', $category->id).'" data-target="#myModal" class="btn btn-danger" data-toggle="modal">
                     Delete
             </button>';
         })
@@ -50,7 +51,7 @@ class CategoryController extends Controller
             $location = public_path('images/category/'. $img);
             Image::make($image)->save($location);
 
-            $category->image = $request->image;
+            $category->image = $img;
         }
 
         if( $category->save() ){
@@ -58,4 +59,50 @@ class CategoryController extends Controller
         }
         
     }
+
+    public function edit($id){
+        $category = Category::find($id);
+        return view('modals.category.edit', compact('category'));
+    }
+
+    public function update(Request $request, $id){
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $category = Category::find($id);
+        $category->name = $request->name;
+        if($request->image){
+            if( File::exists('images/category/'. $category->image) ){
+                File::delete('images/category/'. $category->image);
+            }
+            $image = $request->file('image');
+            $img = rand(0,100) .'.'. $image->getClientOriginalExtension();
+            $location = public_path('images/category/'. $img);
+            Image::make($image)->save($location);
+
+            $category->image = $img;
+        }
+
+        if( $category->save() ){
+            return response()->json(['update'=> $category], 200);
+        }
+    }
+
+
+    public function delete($id){
+        $category = Category::find($id);
+        return view('modals.category.delete', compact('category'));
+    }
+
+    public function do_delete($id){
+        $category = Category::find($id);
+        if( File::exists('images/category/'. $category->image) ){
+            File::delete('images/category/'. $category->image);
+        }
+        if( $category->delete() ){
+            return response()->json(['delete'=> $category], 200);
+        }
+    }
+
 }
