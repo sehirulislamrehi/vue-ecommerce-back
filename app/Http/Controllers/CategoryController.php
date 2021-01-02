@@ -103,9 +103,12 @@ class CategoryController extends Controller
         }
 
         foreach( $category->product as $product ){
+            if( File::exists('images/product/'. $product->image) ){
+                File::delete('images/product/'. $product->image);
+            }
             $product->delete();
         }
-        
+
         if( $category->delete() ){
             return response()->json(['delete'=> $category], 200);
         }
