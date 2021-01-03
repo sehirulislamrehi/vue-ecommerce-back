@@ -126,7 +126,9 @@
                     processing: true,
                     serverSide: true,
                     ajax: "{{ route('category.data') }}",
-                    columns: [{
+                    columns: [
+                         
+                         {
                               data: 'name',
                               name: 'name'
                          },
@@ -137,6 +139,7 @@
                          {
                               data: 'action',
                               name: 'action',
+                              
                          },
                     ]
                });
