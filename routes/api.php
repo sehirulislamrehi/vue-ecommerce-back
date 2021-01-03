@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-
+//category get start
 Route::get('/category',[CategoryController::class,'all']);
+Route::get('/category/{slug}',[CategoryController::class,'category_product']);
+//category get end
+
+
+//product get start
+Route::get('/product',[ProductController::class,'all']);
+Route::get('/product/{slug}',[ProductController::class,'product_detail']);
+//product get end
  

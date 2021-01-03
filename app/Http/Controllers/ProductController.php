@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -59,6 +60,7 @@ class ProductController extends Controller
         $product = new Product();
 
         $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
         $product->description = $request->description;
         $product->regular_price = $request->regular_price;
         $product->offer_price = $request->offer_price;
@@ -96,6 +98,7 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
         $product->description = $request->description;
         $product->regular_price = $request->regular_price;
         $product->offer_price = $request->offer_price;

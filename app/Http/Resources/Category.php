@@ -17,6 +17,7 @@ class Category extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'image' => asset('images/category/'. $this->image),
             'product' => new ProductCollection($this->product),
         ];

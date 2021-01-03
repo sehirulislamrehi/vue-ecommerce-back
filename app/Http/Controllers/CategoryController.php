@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -45,6 +46,7 @@ class CategoryController extends Controller
         $category = new Category();
 
         $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
         if($request->image){
             $image = $request->file('image');
             $img = rand(0,100) .'.'. $image->getClientOriginalExtension();
@@ -72,6 +74,7 @@ class CategoryController extends Controller
 
         $category = Category::find($id);
         $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
         if($request->image){
             if( File::exists('images/category/'. $category->image) ){
                 File::delete('images/category/'. $category->image);

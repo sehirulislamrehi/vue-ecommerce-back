@@ -17,10 +17,12 @@ class Product extends JsonResource
         return[
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'description' => $this->description,
             'regular_price' => $this->regular_price,
             'offer_price' => $this->offer_price,
-            'image' => asset('images/product/'. $this->image)
+            'image' => asset('images/product/'. $this->image),
+            'category' => $this->category
         ];
     }
 }

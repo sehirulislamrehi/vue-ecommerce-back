@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->string('name');
+            $table->string('slug');
             $table->text('description');
             $table->integer('regular_price');
             $table->integer('offer_price')->nullable();
