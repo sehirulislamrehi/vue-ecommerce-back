@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Visitor;
+
 return [
 
     /*
@@ -40,7 +42,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
+        'visitor' => [
+            'driver' => 'session',
+            'provider' => 'visitors'
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -70,6 +75,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'visitors' => [
+            'driver' => 'eloquent',
+            'model' => Visitor::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -99,6 +108,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'visitors' => [
+            'provider' => 'visitors',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ]
     ],
 
     /*

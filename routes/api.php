@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,7 @@ Route::get('/product',[ProductController::class,'all']);
 Route::get('/product/{slug}',[ProductController::class,'product_detail']);
 //product get end
  
+
+//visitor registration start
+Route::post("/visitor/registration",[RegistrationController::class,'registration']);
+//visitor registration end

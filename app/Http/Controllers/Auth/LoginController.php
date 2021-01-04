@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
     public function index(){
-        if( auth()->check() ){
+        if( auth('web')->check() ){
             return redirect()->route('dashboard');
         }
         return view('auth.login');
@@ -23,6 +24,14 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if( Auth::attempt($credentials, true) ){
+            
+            //make login failed start
+            if( auth('visitor')->check() ){
+                $request->session()->flash('failed','Authorized Only');
+                return redirect()->route('login');
+            }
+            //make login failed end
+
             $request->session()->regenerate();
             $request->session()->flash('success','Login successfully done');
             return redirect()->route('dashboard');
