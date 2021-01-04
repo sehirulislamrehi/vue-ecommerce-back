@@ -21,6 +21,10 @@ class CreateVisitorsTable extends Migration
             $table->string('password');
             $table->rememberToken();
 
+            $table->string('api_token', 80)->unique()
+                        ->nullable()
+                        ->default(null);
+
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
 

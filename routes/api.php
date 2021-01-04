@@ -36,4 +36,5 @@ Route::get('/product/{slug}',[ProductController::class,'product_detail']);
 
 //visitor registration start
 Route::post("/visitor/registration",[RegistrationController::class,'registration']);
+Route::post("/visitor/signin",[RegistrationController::class,'login']);
 //visitor registration end
