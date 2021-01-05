@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 03, 2021 at 11:19 AM
+-- Generation Time: Jan 05, 2021 at 04:21 PM
 -- Server version: 5.7.31
--- PHP Version: 7.3.21
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -97,7 +97,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2021_01_02_082612_create_categories_table', 2),
-(5, '2021_01_02_152544_create_products_table', 3);
+(5, '2021_01_02_152544_create_products_table', 3),
+(6, '2021_01_04_013007_create_visitors_table', 4);
 
 -- --------------------------------------------------------
 
@@ -147,7 +148,7 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `slug`, `description`, `reg
 (10, 11, 'Sunsilk Shampoo Lusciously Thick & Long (Makeup Bag Free) 650ml', 'sunsilk-shampoo-lusciously-thick-long-makeup-bag-free-650ml', 'Sunsilk Shampoo Lusciously Thick & Long (Makeup Bag Free) 650ml', 550, NULL, '68.jpg', '2021-01-02 18:57:27', '2021-01-03 01:58:46'),
 (11, 12, 'Rupchanda Soyabean Oil 5ltr', 'rupchanda-soyabean-oil-5ltr', 'Rupchanda Soyabean Oil 5ltr', 525, NULL, '91.jpg', '2021-01-02 18:59:11', '2021-01-03 01:58:53'),
 (12, 12, 'Chashi Aromatic Chinigura Rice 1kg', 'chashi-aromatic-chinigura-rice-1kg', 'Chashi Aromatic Chinigura Rice 1kg', 125, NULL, '29.jpg', '2021-01-02 18:59:31', '2021-01-03 01:58:34'),
-(13, 12, 'Nazirshail Rice Standard (Palki)25 kg', 'nazirshail-rice-standard-palki25-kg', 'Nazirshail Rice Standard (Palki)25 kg', 1470, NULL, '94.jpg', '2021-01-02 18:59:51', '2021-01-03 01:58:56');
+(13, 12, 'Nazirshail Rice Standard (Palki)25 kg', 'nazirshail-rice-standard-palki25-kg', 'Nazirshail Rice Standard (Palki)25 kg', 1470, 1400, '94.jpg', '2021-01-02 18:59:51', '2021-01-03 23:13:03');
 
 -- --------------------------------------------------------
 
@@ -174,7 +175,37 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'admin', 'admin@gmail.com', NULL, '$2y$10$rCLytUkIvMslSjnZ6qIKfeaSFgQDmKPaquzxtduiIJwt/x.Xuz0dK', '5xazKJAsPHIT2NH14Wtm0x29sbnnF9ibt2QMDgKRuclrcqI93kFvFexUdN5Y', '2021-01-01 10:18:49', '2021-01-01 10:18:49');
+(2, 'admin', 'admin@gmail.com', NULL, '$2y$10$rCLytUkIvMslSjnZ6qIKfeaSFgQDmKPaquzxtduiIJwt/x.Xuz0dK', 'e6wOyXImXaseM3mNVnOZ9ArE8SY1wyXHyVJBFMTyiYyuuMGR9Qba3ZVh1gsM', '2021-01-01 10:18:49', '2021-01-01 10:18:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitors`
+--
+
+DROP TABLE IF EXISTS `visitors`;
+CREATE TABLE IF NOT EXISTS `visitors` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `api_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `visitors_email_unique` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `visitors`
+--
+
+INSERT INTO `visitors` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `api_token`, `phone`, `address`, `created_at`, `updated_at`) VALUES
+(7, 'visitor', 'visitor@gmail.com', NULL, '$2y$10$sQSId0Jah4QS5YllidJHJ.2Jwchtl2BW8qAZ14.EcUeAapTZKBcgS', NULL, '2tl0i0ek2JauSbPoN6ytI8qyiMsUrfukLdGstskCSmRIslnkUAXLZvWkhSBMl5cJT21bRFtmbGyqR5wy', NULL, NULL, '2021-01-03 21:38:39', '2021-01-05 06:12:47');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

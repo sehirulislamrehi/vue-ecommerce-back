@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\RegistrationController;
@@ -38,3 +39,8 @@ Route::get('/product/{slug}',[ProductController::class,'product_detail']);
 Route::post("/visitor/registration",[RegistrationController::class,'registration']);
 Route::post("/visitor/signin",[RegistrationController::class,'login']);
 //visitor registration end
+
+
+//add to cart start
+Route::get('/addtocart/{id}',[CartController::class,'get_product']);
+//add to cart end
