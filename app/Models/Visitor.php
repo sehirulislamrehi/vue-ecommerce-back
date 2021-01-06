@@ -13,4 +13,8 @@ class Visitor extends Model
     use Notifiable;
 
 
+    public function invoice(){
+        return $this->hasMany(Invoice::class);
+    }
+
 }

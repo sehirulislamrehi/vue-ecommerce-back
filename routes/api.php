@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,3 +46,12 @@ Route::post("/visitor/signin",[RegistrationController::class,'login']);
 //add to cart start
 Route::get('/addtocart/{id}',[CartController::class,'get_product']);
 //add to cart end
+
+//place order start start
+Route::post('/placeorder',[CheckoutController::class,'orderPlace']);
+//place order start end
+
+
+//profile order start
+Route::get('/profile/order/{token}',[ProfileController::class,'profile']);
+//profile order end
